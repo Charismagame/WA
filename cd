@@ -1,0 +1,12 @@
+function()
+    local this = WeakAuras.regions[aura_env.id].region
+    local s,d,r = GetRuneCooldown(1)
+    
+    if (r) then        
+        this:Color(0.3,0.29,0.96,1)
+        return 0,1,true
+    else
+        this:Color(0.31,0.31,0.31,1)
+        return d,s+d
+    end
+end
