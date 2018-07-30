@@ -1,0 +1,33 @@
+Сфой тригер
+function()
+    return true
+end
+
+Информация о длительности
+function()
+    local this = WeakAuras.regions[aura_env.id].region
+    local thisSpell = GetSpellInfo(206930)
+    local s,d = GetSpellCooldown(thisSpell)
+    local _,isspell = IsUsableSpell(thisSpell)
+    local _,gcd = GetSpellCooldown(61304)
+    
+    if (IsSpellInRange(thisSpell,"target") == 1) then
+        if (d ~= 0 and d > gcd) or (isspell) then
+            this.icon:SetVertexColor(0.42,0.3,0.75,1)
+            this.icon:SetDesaturated(true)
+        else
+            this.icon:SetVertexColor(1,1,1,1,1)
+            this.icon:SetDesaturated(false)
+        end 
+    else 
+        this.icon:SetVertexColor(0.65,0.22,0.30,1)
+        this.icon:SetDesaturated(true)
+    end
+    
+    return d, s + d
+end
+
+Информация об иконке 
+function()
+    return 135675
+end
